@@ -11,7 +11,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//rama dev
+
 Route::apiResource('clients',ClientController::class)->names('clients');
 Route::apiResource('sellers',SellerController::class)->names('sellers');
 Route::apiResource('tickets',TicketController::class)->names('tickets');

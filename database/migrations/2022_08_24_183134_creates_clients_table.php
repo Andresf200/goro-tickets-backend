@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->bigInteger('phone')->unsigned();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }
