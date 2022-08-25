@@ -6,14 +6,21 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TicketResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
-    public function toArray($request)
+    public function toArray($request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->resource->id,
+            'num_ticket' => $this->resource->num_ticket,
+            'date_register' => $this->resource->date_register,
+            'price' => $this->resource->price,
+            'remaining_amount' => ($this->resource->remaining_amount == null)? $this->resource->price:$this->resource->remaining_amount,
+            'id_seller' => $this->resource->id_seller,
+            'id_client' => $this->resource->id_client,
+        ];
+    }
+
+    public static function collection($resource)
+    {
+        return parent::collection($resource);
     }
 }
