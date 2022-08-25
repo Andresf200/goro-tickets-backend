@@ -37,7 +37,7 @@ class ClientController extends Controller
 
     }
 
-    public function destroy(Client $client)
+    public function destroy(Client $client): ClientResource
     {
         $client->delete();
         return ClientResource::make($client);
