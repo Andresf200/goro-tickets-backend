@@ -14,6 +14,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('clients',ClientController::class)->names('clients');
 Route::apiResource('sellers',SellerController::class)->names('sellers');
-Route::apiResource('tickets',TicketController::class)->names('tickets');
+Route::apiResource('tickets',TicketController::class)->names('tickets')
+    ->except('destroy');
 Route::apiResource('payments',PaymentController::class)->names('payments');
 

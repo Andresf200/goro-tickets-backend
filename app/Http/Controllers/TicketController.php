@@ -41,9 +41,5 @@ class TicketController extends Controller
         return TicketResource::make($ticket);
     }
 
-    public function destroy(Ticket $ticket): TicketResource
-    {
-        $ticket->delete();
-        return TicketResource::make($ticket);
-    }
+
 }
