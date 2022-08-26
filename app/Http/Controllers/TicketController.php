@@ -33,7 +33,12 @@ class TicketController extends Controller
 
     public function update(TicketUpdateRequest $request, Ticket $ticket): \Illuminate\Http\JsonResponse|TicketResource
     {
-        //todo update
+        $ticket->fill($request->validated());
+        if($ticket->isClean()){
+            return response()->json(['status' => 422,'message' => "Debe especificar al menos un valor diferente para actualizar"]);
+        }
+        $ticket->save();
+        return TicketResource::make($ticket);
     }
 
     public function destroy(Ticket $ticket): TicketResource

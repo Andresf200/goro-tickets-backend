@@ -34,7 +34,6 @@ class ClientController extends Controller
         }
         $client->save();
         return  ClientResource::make($client);
-
     }
 
     public function destroy(Client $client): ClientResource
