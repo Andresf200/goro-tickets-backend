@@ -24,6 +24,7 @@ class PaymentController extends Controller
 
     public function store(PaymentStoreRequest $request): PaymentResource
     {
+        //todo cambiat monto que se debe remaining_amount
         return PaymentResource::make(Payment::create($request->validated()));
     }
 

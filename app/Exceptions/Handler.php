@@ -43,6 +43,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        //todo agregar excepciones personalizadas
+        //todo agregar traducion error
         $this->reportable(function (Throwable $e) {
             //
         });
