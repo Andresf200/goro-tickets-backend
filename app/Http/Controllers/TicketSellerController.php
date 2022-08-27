@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\TicketResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class TicketClientController extends Controller
+class TicketSellerController extends Controller
 {
     /**
-     * @description busca todas boletas con la cedula del cliente nombre o apellido
+     * @description busca todas boletas con la cedula del vendedor nombre o apellido
      * @param Request $request
-     * @return JsonResponse|AnonymousResourceCollection
+     * @return AnonymousResourceCollection
      */
-    public function index(Request $request): JsonResponse|AnonymousResourceCollection
+    public function index(Request $request):JsonResponse|AnonymousResourceCollection
     {
         $validated = $request->validate([
             'identifier' => ['integer'],
@@ -27,7 +27,7 @@ class TicketClientController extends Controller
             return response()->json(['status' => 422, 'message' => "Debe especificar al menos un valor"]);
         }
 
-        return TicketResource::collection(Client::Where(function ($query) use ($validated) {
+        return TicketResource::collection(Seller::Where(function ($query) use ($validated) {
             foreach ($validated as $key => $data) {
                 $query->where($key, '=', $data);
             }
@@ -35,12 +35,12 @@ class TicketClientController extends Controller
     }
 
     /**
-     * @description busca todas las boletas por el id del cliente
-     * @param Client $client
+     * @description busca todas las boletas por el id del vendedor
+     * @param Seller $seller
      * @return AnonymousResourceCollection
      */
-    public function show(Client $client): AnonymousResourceCollection
+    public function show(Seller  $seller): AnonymousResourceCollection
     {
-        return TicketResource::collection($client->tickets);
+        return TicketResource::collection($seller->tickets);
     }
 }

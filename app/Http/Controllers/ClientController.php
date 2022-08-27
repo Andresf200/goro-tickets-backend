@@ -6,7 +6,9 @@ use App\Http\Requests\ClientStoreRequest;
 use App\Http\Requests\ClientUpdateRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ClientController extends Controller
 {
@@ -16,7 +18,7 @@ class ClientController extends Controller
         return ClientResource::make($client);
     }
 
-    public function index(): ?\Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(): AnonymousResourceCollection
     {
         return ClientResource::collection(Client::all());
     }
@@ -26,7 +28,7 @@ class ClientController extends Controller
         return ClientResource::make(Client::create($request->validated()));
     }
 
-    public function update(ClientUpdateRequest $request,Client $client): \Illuminate\Http\JsonResponse|ClientResource
+    public function update(ClientUpdateRequest $request,Client $client): JsonResponse|ClientResource
     {
         $client->fill($request->validated());
         if($client->isClean()){
