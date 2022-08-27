@@ -43,4 +43,11 @@ class ClientController extends Controller
         $client->delete();
         return ClientResource::make($client);
     }
+
+    public function showIdentifier(Request $request)
+    {
+        $validated = $request->validate(['identifier' => ['required','integer']]);
+        return ClientResource::make(Client::where('identifier','=',$validated['identifier'])->firstOrFail());
+    }
+
 }

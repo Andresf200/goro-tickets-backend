@@ -24,7 +24,8 @@ class PaymentController extends Controller
 
     public function store(PaymentStoreRequest $request): PaymentResource
     {
-        //todo cambiat monto que se debe remaining_amount
+        $ticket = Ticket::findOrFail($request->validated('id_ticket'));
+        $ticket->update(['remaining_amount' => $ticket->remaining_amount - $request->validated('mount') ]);
         return PaymentResource::make(Payment::create($request->validated()));
     }
 

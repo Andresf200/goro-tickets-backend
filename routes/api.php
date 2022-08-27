@@ -16,7 +16,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResource('clients',ClientController::class)->names('clients');
+Route::post('client/identifier',[ClientController::class,'showIdentifier'])->name('client_identifier');
+
 Route::apiResource('sellers',SellerController::class)->names('sellers');
+Route::post('seller/identifier',[SellerController::class,'showIdentifier'])->name('seller_identifier');
+
 Route::apiResource('tickets',TicketController::class)->names('tickets')
     ->except('destroy');
 Route::post('ticket/num',[TicketController::class,'showNumTicket'])->name('ticket_num');
@@ -29,5 +33,7 @@ Route::get('client/tickets/{client}',[TicketClientController::class,'show'])->na
 
 Route::post('tickets/search/seller',[TicketSellerController::class,'index'])->name('ticket_search_seller');
 Route::get('seller/tickets/{seller}',[TicketSellerController::class,'show'])->name('seller_tickets');
+
+Route::get('ticket/payments/{ticket}',[TicketPaymentController::class,'show'])->name('ticket_payments');
 
 Route::get('ticket/payments/{ticket}',[TicketPaymentController::class,'show'])->name('ticket_payments');
