@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    public function show(Payment $payment)
+    {
+        return PaymentResource::make($payment);
+    }
+
     public function index()
     {
         return PaymentResource::collection(Payment::all());
