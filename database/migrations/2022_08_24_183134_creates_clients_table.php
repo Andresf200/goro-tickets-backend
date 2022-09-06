@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->bigInteger('phone')->unsigned();
             $table->string('address')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
