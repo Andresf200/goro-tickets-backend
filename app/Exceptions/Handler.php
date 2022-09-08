@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -58,14 +59,6 @@ class Handler extends ExceptionHandler
                 Response::HTTP_UNAUTHORIZED);
         }
 
-
-        if ($exception instanceof ValidationException) {
-            $errors = $exception->validator->errors()->getMessages();
-
-            return $this->errorResponse($errors,
-                Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
         if(env('APP_DEBUG',false)){
             return parent::render($request, $exception);
         }
@@ -76,13 +69,12 @@ class Handler extends ExceptionHandler
 
     public function register()
     {
-        //todo agregar traducion error
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+//        $this->reportable(function (Throwable $e) {
+//            //
+//        });
     }
 
-    protected function invalidJson($request, ValidationException $exception): JsonApiValidationErrorResponse|\Illuminate\Http\JsonResponse
+    protected function invalidJson($request, ValidationException $exception): JsonApiValidationErrorResponse|JsonResponse
     {
         if (! $request->routeIs('api/login')) {
             return new JsonApiValidationErrorResponse($exception,422);
