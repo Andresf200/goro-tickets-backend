@@ -6,7 +6,9 @@ use App\Http\Requests\TicketStoreRequest;
 use App\Http\Requests\TicketUpdateRequest;
 use App\Http\Resources\TicketResource;
 use App\Models\Ticket;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class TicketController extends Controller
 {
@@ -16,22 +18,23 @@ class TicketController extends Controller
         return TicketResource::make($ticket);
     }
 
-    public function index(): ?\Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(): ?AnonymousResourceCollection
     {
         return TicketResource::collection(Ticket::all());
     }
 
-    public function store(TicketStoreRequest $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function store(TicketStoreRequest $request): AnonymousResourceCollection
     {
-        $data = $request->validated();
         $tickets = [];
-        foreach ($data as $insert){
-            $tickets[] = Ticket::create($insert);
+        foreach ($request->validated('num_tickets') as $num_ticket){
+            $tickets[] = $ticket = Ticket::make($request->only('price','remaining_amount',
+                'id_seller','id_client'));
+            $ticket->fill(['num_ticket' => $num_ticket,"date_register" => now()])->save();
         }
         return TicketResource::collection($tickets);
     }
 
-    public function update(TicketUpdateRequest $request, Ticket $ticket): \Illuminate\Http\JsonResponse|TicketResource
+    public function update(TicketUpdateRequest $request, Ticket $ticket): JsonResponse|TicketResource
     {
         $ticket->fill($request->validated());
         if($ticket->isClean()){

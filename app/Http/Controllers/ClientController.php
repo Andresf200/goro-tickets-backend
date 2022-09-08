@@ -28,7 +28,7 @@ class ClientController extends Controller
         return ClientResource::make(Client::create($request->validated()));
     }
 
-    public function update(ClientUpdateRequest $request,Client $client): JsonResponse|ClientResource
+    public function update(Client $client, ClientUpdateRequest $request): JsonResponse|ClientResource
     {
         $client->fill($request->validated());
         if($client->isClean()){

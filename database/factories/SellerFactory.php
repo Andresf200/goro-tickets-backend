@@ -10,7 +10,7 @@ class SellerFactory extends Factory
     public function definition()
     {
         return [
-            'identifier' => $this->faker->randomElement([154521564,5456415,545456]),
+            'identifier' => $this->faker->randomNumber(5),
             'name' =>  $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'phone' => $this->faker->randomElement([525414,4125455]),
