@@ -18,11 +18,10 @@ class TicketStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            '*.num_ticket' => ['integer','required', Rule::unique(Ticket::class, 'num_ticket')->ignore($this->route('ticket'))],
-            '*.date_register' => ['required','date'],
-            '*.price' => ['integer'],
-            '*.id_seller' => ['required',Rule::exists(Seller::class, 'id')],
-            '*.id_client' => [Rule::exists(Client::class, 'id')],
+            'num_tickets.*' => ['integer','required', Rule::unique(Ticket::class, 'num_ticket')->ignore($this->route('ticket'))],
+            'price' => ['integer'],
+            'id_seller' => ['required',Rule::exists(Seller::class, 'id')],
+            'id_client' => [Rule::exists(Client::class, 'id')],
         ];
     }
 }
