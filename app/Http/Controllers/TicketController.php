@@ -41,5 +41,9 @@ class TicketController extends Controller
         return TicketResource::make($ticket);
     }
 
-
+    public function showNumTicket(Request $request): TicketResource
+    {
+        $validated = $request->validate(['num_ticket' => ['required','integer']]);
+        return TicketResource::make(Ticket::where('num_ticket','=',$validated['num_ticket'])->firstOrFail());
+    }
 }

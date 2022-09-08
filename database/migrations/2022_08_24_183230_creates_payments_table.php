@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('date_pay');
             $table->decimal('mount');
-
             $table->bigInteger('id_ticket');
             $table->foreign('id_ticket')->references('id')->on('tickets');
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

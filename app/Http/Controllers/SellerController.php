@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SellerStoreRequest;
 use App\Http\Requests\SellerUpdateRequest;
+use App\Http\Resources\ClientResource;
 use App\Http\Resources\SellerResource;
+use App\Models\Client;
 use App\Models\Seller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -47,5 +49,11 @@ class SellerController extends Controller
     {
         $seller->delete();
         return SellerResource::make($seller);
+    }
+
+    public function showIdentifier(Request $request)
+    {
+        $validated = $request->validate(['identifier' => ['required','integer']]);
+        return SellerResource::make(Seller::where('identifier','=',$validated['identifier'])->firstOrFail());
     }
 }
