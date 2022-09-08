@@ -17,7 +17,7 @@ class ClientUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'identifier' => ['string', Rule::unique(Client::class, 'identifier')->ignore($this->route('client'))],
+            'identifier' => ['numeric', Rule::unique(Client::class, 'identifier')->ignore($this->route('client'))],
             'name' => ['string'],
             'last_name' => ['string'],
             'phone' => ['integer'],
