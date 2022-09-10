@@ -49,4 +49,13 @@ class TicketController extends Controller
         $validated = $request->validate(['num_ticket' => ['required','integer']]);
         return TicketResource::make(Ticket::where('num_ticket','=',$validated['num_ticket'])->firstOrFail());
     }
+
+    public function destroy(Ticket $ticket): TicketResource
+    {
+        $ticket->delete();
+        return TicketResource::make($ticket);
+    }
+
+
+
 }
