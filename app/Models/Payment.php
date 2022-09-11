@@ -19,11 +19,6 @@ class Payment extends Model
         'id_ticket',
     ];
 
-    protected $casts = [
-        'date_pay' => 'date',
-    ];
-
-
     public function ticket(): BelongsTo
     {
         return $this->belongsTo(Ticket::class,'id_ticket');
