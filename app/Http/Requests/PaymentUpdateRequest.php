@@ -17,7 +17,7 @@ class PaymentUpdateRequest extends FormRequest
     {
         return [
             'date_pay' => ['date'],
-            'mount' => ['integer'],
+            'mount' => ["numeric","between:0,800000.99",'max:800000'],
             'id_ticket' => [Rule::exists(Ticket::class, 'id')]
         ];
     }

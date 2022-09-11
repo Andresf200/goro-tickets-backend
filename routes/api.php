@@ -24,8 +24,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::apiResource('sellers',SellerController::class)->names('sellers');
     Route::post('seller/identifier',[SellerController::class,'showIdentifier'])->name('seller_identifier');
 
-    Route::apiResource('tickets',TicketController::class)->names('tickets')
-        ->except('destroy');
+    Route::apiResource('tickets',TicketController::class)->names('tickets');
     Route::post('ticket/num',[TicketController::class,'showNumTicket'])->name('ticket_num');
 
     Route::apiResource('payments',PaymentController::class)->names('payments');

@@ -32,7 +32,7 @@ class Ticket extends Model
 
     public function seller(): BelongsTo
     {
-        return $this->belongsTo(Client::class,'id_seller');
+        return $this->belongsTo(Seller::class,'id_seller');
     }
 
     public function payments(): HasMany

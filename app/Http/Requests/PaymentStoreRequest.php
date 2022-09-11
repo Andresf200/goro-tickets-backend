@@ -17,7 +17,7 @@ class PaymentStoreRequest extends FormRequest
     {
         return [
             'date_pay' => ['required','date'],
-            'mount' => ['required','integer'],
+            'mount' => ["required","numeric","between:0,800000.99",'max:800000'],
             'id_ticket' => ['required',Rule::exists(Ticket::class, 'id')]
         ];
     }
