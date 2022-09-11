@@ -30,8 +30,8 @@ class TicketResource extends JsonResource
     private function getIncludes()
     {
         return [
-            'seller' => SellerResource::make($this->resource->client),
-            'client' => ClientResource::make($this->resource->seller)
+            'seller' => SellerResource::make($this->resource->seller),
+            'client' => ClientResource::make($this->resource->client)
         ];
     }
 }
