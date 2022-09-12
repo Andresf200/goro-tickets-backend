@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('price')->default(35.000);
             $table->bigInteger('id_seller')->nullable();
             $table->foreign('id_seller')->references('id')->on('sellers');
-            $table->bigInteger('id_client');
+            $table->bigInteger('id_client')->nullable();
             $table->foreign('id_client')->references('id')->on('clients');
             $table->softDeletes();
             $table->timestamps();
