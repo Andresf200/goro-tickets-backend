@@ -26,4 +26,5 @@ class Seller extends Model
     {
         return $this->hasMany(Ticket::class, 'id_seller');
     }
+
 }

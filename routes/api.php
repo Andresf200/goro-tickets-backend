@@ -36,6 +36,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('seller/tickets/{seller}',[TicketSellerController::class,'show'])->name('seller_tickets');
     Route::get('ticket/payments/{ticket}',[TicketPaymentController::class,'show'])->name('ticket_payments');
 
+    Route::get('seller/clients/{seller}',[SellerClientController::class,'show'])->name('seller_clients');
 
     Route::delete('logout',[AuthController::class,'destroy'])->name('logout');
 
