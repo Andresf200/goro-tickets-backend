@@ -10,9 +10,12 @@ class TicketPaymentResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
-            'date_pay' => $this->resource->date_pay,
-            'mount' => $this->resource->mount,
-            'id_ticket' => $this->resource->id_ticket,
+            'num_ticket' => $this->resource->num_ticket,
+            'date_register' => $this->resource->date_register,
+            'price' => $this->resource->price,
+            'remaining_amount' => ($this->resource->remaining_amount == null)? $this->resource->price:$this->resource->remaining_amount,
+            'id_seller' => $this->resource->id_seller,
+            'id_client' => $this->resource->id_client
         ];
     }
 
