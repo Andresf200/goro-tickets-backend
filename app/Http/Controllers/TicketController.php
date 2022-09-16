@@ -42,6 +42,7 @@ class TicketController extends Controller
         }
         $ticket->save();
         return TicketResource::make($ticket);
+        //funciona
     }
 
     public function showNumTicket(Request $request): TicketResource
