@@ -27,11 +27,17 @@ class TicketSellerController extends Controller
             return response()->json(['status' => 422, 'message' => "Debe especificar al menos un valor"]);
         }
 
-        return TicketResource::collection(Seller::Where(function ($query) use ($validated) {
+          $seller = Seller::Where(function ($query) use ($validated) {
             foreach ($validated as $key => $data) {
                 $query->where($key, '=', $data);
             }
-        })->get()->firstOrFail()->tickets);
+        })->get()->first();
+
+        if ($seller == null) {
+            return response()->json(['status' => 422, 'message' => "Ese vendedor no existe por favor verifique"]);
+        }
+
+        return TicketResource::collection($seller->tickets);
     }
 
     /**
