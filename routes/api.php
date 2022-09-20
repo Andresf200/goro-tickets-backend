@@ -38,6 +38,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::get('seller/clients/{seller}',[SellerClientController::class,'show'])->name('seller_clients');
 
+    Route::delete('ticekt/client/delete/{ticket}',[TicketClientController::class,'destroy'])->name('client_tickets');
+
     Route::delete('logout',[AuthController::class,'destroy'])->name('logout');
 
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\TicketResource;
@@ -42,5 +43,17 @@ class TicketClientController extends Controller
     public function show(Client $client): AnonymousResourceCollection
     {
         return TicketResource::collection($client->tickets);
+    }
+
+    /**
+     * @description Elimina el cliente de la relacion con el tickete
+     * @param Ticket $ticket
+     * @return
+     */
+    public function destroy(Ticket $ticket)
+    {
+        $ticket->update(['id_client' => null]);
+
+        return TicketResource::make($ticket);
     }
 }
