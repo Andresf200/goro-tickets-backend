@@ -26,9 +26,14 @@ class TicketController extends Controller
     public function store(TicketStoreRequest $request): AnonymousResourceCollection
     {
         $tickets = [];
+
         foreach (array_unique($request->validated('num_tickets')) as $num_ticket){
-            $tickets[] = $ticket = Ticket::make($request->only('price','remaining_amount',
-                'id_seller','id_client'));
+            $tickets[] = $ticket = Ticket::make([
+                    'price' => ($request->price == null)? 35000 : $request->price,
+                    'remaining_amount' => ($request->price == null)? 35000 : $request->price,
+                    'id_seller' => $request->id_seller,
+                    'id_client' => $request->id_client,
+                ]);
             $ticket->fill(['num_ticket' => $num_ticket,"date_register" => now()])->save();
         }
         return TicketResource::collection($tickets);

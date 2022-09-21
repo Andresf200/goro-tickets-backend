@@ -2,13 +2,17 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClientsDeletedController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SellerClientController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SellersDeletedController;
 use App\Http\Controllers\TicketClientController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketPaymentController;
+use App\Http\Controllers\TicketsDeletedController;
 use App\Http\Controllers\TicketSellerController;
+use App\Http\Controllers\UserDeletedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +46,15 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::delete('logout',[AuthController::class,'destroy'])->name('logout');
 
+
+    Route::apiResource('clientsDeleted',ClientsDeletedController::class)->names('clients.deleted')
+    ->only('show','index');
+
+    Route::apiResource('sellersDeleted',SellersDeletedController::class)->names('sellers.deleted')
+        ->only('show','index');
+
+    Route::apiResource('ticketsDeleted',TicketsDeletedController::class)->names('sellers.deleted')
+        ->only('show','index');
 });
 
 Route::post('login',[AuthController::class,'store'])->name('login');

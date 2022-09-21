@@ -41,6 +41,8 @@ class PaymentController extends Controller
 
     public function destroy(Payment $payment): PaymentResource
     {
+        $ticket = $payment->ticket;
+        $ticket->update(['remaining_amount' => $ticket->remaining_amount + $payment->mount]);
         $payment->delete();
         return  PaymentResource::make($payment);
     }
