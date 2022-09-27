@@ -15,7 +15,6 @@ class TicketFactory extends Factory
             'num_ticket' =>  $this->faker->randomNumber(5),
             'date_register' =>  $this->faker->date(),
             'price' =>  $this->faker->randomNumber(4),
-            'remaining_amount' =>  $this->faker->randomNumber(3),
             'id_seller' =>  Seller::factory()->create(),
             'id_client' =>  Client::factory()->create(),
         ];

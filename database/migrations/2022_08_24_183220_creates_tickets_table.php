@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('num_ticket')->unique()->unsigned();
             $table->date('date_register')->default(now());
-            $table->decimal('remaining_amount')->nullable();
-            $table->decimal('price')->default(35.000);
+            $table->integer('price')->default(35000);
             $table->bigInteger('id_seller')->nullable();
             $table->foreign('id_seller')->references('id')->on('sellers');
             $table->bigInteger('id_client')->nullable();

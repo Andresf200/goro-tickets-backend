@@ -24,8 +24,6 @@ class PaymentController extends Controller
 
     public function store(PaymentStoreRequest $request): PaymentResource
     {
-        $ticket = Ticket::findOrFail($request->validated('id_ticket'));
-        $ticket->update(['remaining_amount' => $ticket->remaining_amount - $request->validated('mount') ]);
         return PaymentResource::make(Payment::create($request->validated()));
     }
 
@@ -41,6 +39,8 @@ class PaymentController extends Controller
 
     public function destroy(Payment $payment): PaymentResource
     {
+        $ticket = $payment->ticket;
+        $ticket->update(['remaining_amount' => $ticket->remaining_amount + $payment->mount]);
         $payment->delete();
         return  PaymentResource::make($payment);
     }
