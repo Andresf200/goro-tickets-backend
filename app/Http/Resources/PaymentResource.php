@@ -12,6 +12,7 @@ class PaymentResource extends JsonResource
             'id' => $this->resource->id,
             'date_pay' => $this->resource->date_pay,
             'mount' => $this->resource->mount,
+            'remaining_amount' => $this->resource->RemainingAmount,
             'id_ticket' => $this->resource->id_ticket,
             'included' => [
                 $this->getIncludes()

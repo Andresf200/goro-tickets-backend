@@ -18,7 +18,6 @@ class Ticket extends Model
         'num_ticket',
         'date_register',
         'price',
-        'remaining_amount',
         'id_seller',
         'id_client',
     ];

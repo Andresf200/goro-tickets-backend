@@ -30,7 +30,6 @@ class TicketController extends Controller
         foreach (array_unique($request->validated('num_tickets')) as $num_ticket){
             $tickets[] = $ticket = Ticket::make([
                     'price' => ($request->price == null)? 35000 : $request->price,
-                    'remaining_amount' => ($request->price == null)? 35000 : $request->price,
                     'id_seller' => $request->id_seller,
                     'id_client' => $request->id_client,
                 ]);
