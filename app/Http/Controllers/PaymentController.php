@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
+use App\Http\Resources\PaymentResource;
 use App\Http\Requests\PaymentStoreRequest;
 use App\Http\Requests\PaymentUpdateRequest;
-use App\Http\Resources\PaymentResource;
-use App\Http\Resources\TicketResource;
-use App\Models\Payment;
-use App\Models\Ticket;
-use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {

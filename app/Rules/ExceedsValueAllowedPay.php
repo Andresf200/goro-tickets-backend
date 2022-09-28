@@ -21,10 +21,10 @@ class ExceedsValueAllowedPay implements Rule
     public function passes($attribute, $value)
     {
         $this->reaming_amount = Payment::REAMING_AMOUNT - $this->ticket->payments->sum('mount');
-        if ($this->reaming_amount <= $value){
-            return false;
+        if (intval($value) <= $this->reaming_amount){
+            return true;
         }
-        return true;
+        return false;
     }
 
     public function message()
