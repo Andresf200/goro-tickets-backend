@@ -22,6 +22,7 @@ class PaymentStoreRequest extends FormRequest
             'mount' => [
                 "required",
                 "integer",
+                "min:1",
                 new ExceedsValueAllowedPay($this->id_ticket)
             ]
         ];

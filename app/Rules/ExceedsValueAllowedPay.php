@@ -11,6 +11,7 @@ class ExceedsValueAllowedPay implements Rule
 
     protected $ticket;
     protected int $reaming_amount;
+    private $message;
 
     public function __construct($ticket)
     {
@@ -22,13 +23,18 @@ class ExceedsValueAllowedPay implements Rule
     {
         $this->reaming_amount = Payment::REAMING_AMOUNT - $this->ticket->payments->sum('mount');
         if (intval($value) <= $this->reaming_amount){
+            if (intval($value) == 0){
+                $this->message = 'El valor total de la boleta ya ha sido cancelado, por favor revise el listado de pagos de esta boleta para verificar';
+                return false;
+            }
             return true;
         }
+        $this->message = "El monto a pagar excede el valor adeudado que es de $".$this->reaming_amount;
         return false;
     }
 
     public function message()
     {
-        return "El monto a pagar excede el valor adeudado que es de $".$this->reaming_amount;
+        return $this->message;
     }
 }
