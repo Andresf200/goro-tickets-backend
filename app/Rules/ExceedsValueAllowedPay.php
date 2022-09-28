@@ -24,8 +24,7 @@ class ExceedsValueAllowedPay implements Rule
         $this->reaming_amount = Payment::REAMING_AMOUNT - $this->ticket->payments->sum('mount');
         if (intval($value) <= $this->reaming_amount){
             if (intval($value) == 0){
-                $this->message = "El valor total de la boleta ya ha sido cancelado revise el listado de pagos de esta boleta
-                 para verificar";
+                $this->message = 'El valor total de la boleta ya ha sido cancelado, por favor revise el listado de pagos de esta boleta para verificar';
                 return false;
             }
             return true;
