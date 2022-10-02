@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
     {
 //         \App\Models\User::factory(10)->create();
 
-         \App\Models\Client::factory(10)->create();
-         \App\Models\Seller::factory(10)->create();
-         \App\Models\Ticket::factory(10)->create();
-         \App\Models\Payment::factory(10)->create();
+         //\App\Models\Client::factory(10)->create();
+         //\App\Models\Seller::factory(10)->create();
+         //\App\Models\Ticket::factory(10)->create();
+         //\App\Models\Payment::factory(10)->create();
 
 
          \App\Models\User::factory()->create([
