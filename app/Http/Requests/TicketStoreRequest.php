@@ -20,7 +20,7 @@ class TicketStoreRequest extends FormRequest
     {
         return [
             'num_tickets.*' => [
-                'string',
+                'numeric',
                 'required',
                 Rule::unique(Ticket::class, 'num_ticket')->ignore($this->route('ticket'))
             ],

@@ -18,7 +18,7 @@ class TicketUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'num_ticket' => ['integer', Rule::unique(Ticket::class, 'num_ticket')->ignore($this->route('ticket'))],
+            'num_ticket' => ['numeric',Rule::unique(Ticket::class, 'num_ticket')->ignore($this->route('ticket'))],
             'date_register' => ['date'],
             'price' => ['integer'],
             'id_seller' => [Rule::exists(Seller::class, 'id')],
